@@ -2,7 +2,6 @@ package com.hlju.dao;
 
 import com.hlju.model.User;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
