@@ -10,6 +10,8 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
       /WEB-INF/config/application-context.xml
+      /WEB-INF/config/database-context.xml
+      /WEB-INF/config/mybatis-configuration.xml
       /WEB-INF/config/jf-admin-service.xml
       /WEB-INF/config/jf-admin-servlet.xml
     </param-value>
