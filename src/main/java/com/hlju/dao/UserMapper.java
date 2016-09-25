@@ -35,4 +35,6 @@ public interface UserMapper {
 
     UserResp getUserAll(User user);
 
+    List<UserResp> getUserRespList(User user);
+
 }

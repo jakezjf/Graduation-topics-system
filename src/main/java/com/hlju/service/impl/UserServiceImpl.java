@@ -77,4 +77,11 @@ public class UserServiceImpl implements UserService {
     public UserResp getUserAll(User user) {
         return userMapper.getUserAll(user);
     }
+
+    public List<UserResp> getUserRespList(User user) {
+        if (user == null){
+            return null;
+        }
+        return userMapper.getUserRespList(user);
+    }
 }

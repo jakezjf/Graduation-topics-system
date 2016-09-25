@@ -26,4 +26,6 @@ public interface UserService {
 
     UserResp getUserAll(User user);
 
+    List<UserResp> getUserRespList(User user);
+
 }
