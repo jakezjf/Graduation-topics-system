@@ -110,4 +110,10 @@ public class UserController {
         return userService.getUserAll(user);
     }
 
+    @RequestMapping(value = "getUserRespList.jhtml",method = RequestMethod.POST,produces="application/json")
+    @ResponseBody
+    public List<UserResp> getUserRespList(User user){
+        return userService.getUserRespList(user);
+    }
+
 }
