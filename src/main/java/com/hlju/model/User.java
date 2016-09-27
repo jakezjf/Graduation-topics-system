@@ -19,6 +19,16 @@ public class User {
 
     private String back4;
 
+    public User(){}
+
+    public User(String userId, String userPassword, Integer userType, String userPhone, String userEmail) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userType = userType;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+    }
+
     public String getUserId() {
         return userId;
     }
