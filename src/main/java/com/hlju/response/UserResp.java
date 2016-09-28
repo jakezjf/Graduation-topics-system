@@ -13,6 +13,15 @@ public class UserResp {
 
     private String userEmail;
 
+    public UserResp(){}
+
+    public UserResp(String userId, Integer userType, String userPhone, String userEmail) {
+        this.userId = userId;
+        this.userType = userType;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+    }
+
     public String getUserId() {
         return userId;
     }

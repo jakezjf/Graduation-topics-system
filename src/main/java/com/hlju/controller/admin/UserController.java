@@ -1,4 +1,4 @@
-package com.hlju.controller;
+package com.hlju.controller.admin;
 
 import com.hlju.model.User;
 import com.hlju.response.UserResp;
@@ -116,4 +116,9 @@ public class UserController {
         return userService.getUserRespList(user);
     }
 
+    @RequestMapping(value = "getUserRespList.jhtml",method = RequestMethod.GET,produces="application/json")
+    @ResponseBody
+    public List<UserResp> getUserRespListGet(User user){
+        return userService.getUserRespList(user);
+    }
 }
