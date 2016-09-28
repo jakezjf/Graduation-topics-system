@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hlju.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.hlju.model.Student" >
+    <id column="stu_id" property="stuId" jdbcType="VARCHAR" />
+    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="stu_sex" property="stuSex" jdbcType="INTEGER" />
+    <result column="tea_id" property="teaId" jdbcType="VARCHAR" />
+    <result column="grade_id" property="gradeId" jdbcType="INTEGER" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <result column="major_id" property="majorId" jdbcType="INTEGER" />
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="back_1" property="back1" jdbcType="VARCHAR" />
+    <result column="back_2" property="back2" jdbcType="VARCHAR" />
+    <result column="back_3" property="back3" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="RespMap" type="com.hlju.response.StudentResp" >
+    <id column="stu_id" property="stuId" jdbcType="VARCHAR" />
+    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="stu_sex" property="stuSex" jdbcType="INTEGER" />
+    <result column="tea_id" property="teaId" jdbcType="VARCHAR" />
+    <result column="grade_id" property="gradeId" jdbcType="INTEGER" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <result column="major_id" property="majorId" jdbcType="INTEGER" />
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    stu_id, stu_name, stu_sex, tea_id, grade_id, college_id, major_id, class_id, back_1, 
+    back_2, back_3
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from student
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.hlju.model.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="stuSex != null" >
+        stu_sex,
+      </if>
+      <if test="teaId != null" >
+        tea_id,
+      </if>
+      <if test="gradeId != null" >
+        grade_id,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="majorId != null" >
+        major_id,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="back1 != null" >
+        back_1,
+      </if>
+      <if test="back2 != null" >
+        back_2,
+      </if>
+      <if test="back3 != null" >
+        back_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuSex != null" >
+        #{stuSex,jdbcType=INTEGER},
+      </if>
+      <if test="teaId != null" >
+        #{teaId,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="majorId != null" >
+        #{majorId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="back1 != null" >
+        #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null" >
+        #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null" >
+        #{back3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hlju.model.Student" >
+    update student
+    <set >
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuSex != null" >
+        stu_sex = #{stuSex,jdbcType=INTEGER},
+      </if>
+      <if test="teaId != null" >
+        tea_id = #{teaId,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        grade_id = #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="majorId != null" >
+        major_id = #{majorId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="back1 != null" >
+        back_1 = #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null" >
+        back_2 = #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null" >
+        back_3 = #{back3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getStudentResp" resultMap="RespMap" parameterType="com.hlju.model.Student">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where 1=1
+    <if test="stuId != null" >
+      and stu_id = #{stuId,jdbcType=VARCHAR}
+    </if>
+    <if test="stuName != null" >
+      and stu_name = #{stuName,jdbcType=VARCHAR}
+    </if>
+    <if test="stuSex != null" >
+      and stu_sex = #{stuSex,jdbcType=INTEGER}
+    </if>
+    <if test="teaId != null" >
+      and tea_id = #{teaId,jdbcType=VARCHAR}
+    </if>
+    <if test="gradeId != null" >
+      and grade_id = #{gradeId,jdbcType=INTEGER}
+    </if>
+    <if test="collegeId != null" >
+      and college_id = #{collegeId,jdbcType=INTEGER}
+    </if>
+    <if test="majorId != null" >
+      and major_id = #{majorId,jdbcType=INTEGER}
+    </if>
+    <if test="classId != null" >
+      and class_id = #{classId,jdbcType=INTEGER}
+    </if>
+    <if test="back1 != null" >
+      and back_1 = #{back1,jdbcType=VARCHAR}
+    </if>
+    <if test="back2 != null" >
+      and back_2 = #{back2,jdbcType=VARCHAR}
+    </if>
+    <if test="back3 != null" >
+      and back_3 = #{back3,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="getStudentRespList" resultMap="RespMap" parameterType="com.hlju.model.Student">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where 1=1
+    <if test="stuId != null" >
+      and stu_id = #{stuId,jdbcType=VARCHAR}
+    </if>
+    <if test="stuName != null" >
+      and stu_name = #{stuName,jdbcType=VARCHAR}
+    </if>
+    <if test="stuSex != null" >
+      and stu_sex = #{stuSex,jdbcType=INTEGER}
+    </if>
+    <if test="teaId != null" >
+      and tea_id = #{teaId,jdbcType=VARCHAR}
+    </if>
+    <if test="gradeId != null" >
+      and grade_id = #{gradeId,jdbcType=INTEGER}
+    </if>
+    <if test="collegeId != null" >
+      and college_id = #{collegeId,jdbcType=INTEGER}
+    </if>
+    <if test="majorId != null" >
+      and major_id = #{majorId,jdbcType=INTEGER}
+    </if>
+    <if test="classId != null" >
+      and class_id = #{classId,jdbcType=INTEGER}
+    </if>
+    <if test="back1 != null" >
+      and back_1 = #{back1,jdbcType=VARCHAR}
+    </if>
+    <if test="back2 != null" >
+      and back_2 = #{back2,jdbcType=VARCHAR}
+    </if>
+    <if test="back3 != null" >
+      and back_3 = #{back3,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+</mapper>
