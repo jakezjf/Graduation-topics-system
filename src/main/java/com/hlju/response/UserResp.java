@@ -13,6 +13,9 @@ public class UserResp {
 
     private String userEmail;
 
+    private int userCount = 0;
+
+
     public UserResp(){}
 
     public UserResp(String userId, Integer userType, String userPhone, String userEmail) {
@@ -20,6 +23,14 @@ public class UserResp {
         this.userType = userType;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
+    }
+
+    public UserResp(String userId, Integer userType, String userPhone, String userEmail, int userCount) {
+        this.userId = userId;
+        this.userType = userType;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+        this.userCount = userCount;
     }
 
     public String getUserId() {
@@ -52,5 +63,13 @@ public class UserResp {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public int getUserCount() {
+        return userCount;
+    }
+
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
     }
 }
