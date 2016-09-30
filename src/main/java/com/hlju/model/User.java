@@ -1,7 +1,10 @@
 package com.hlju.model;
 
 public class User {
+
     private String userId;
+
+    private String userName;
 
     private String userPassword;
 
@@ -19,14 +22,25 @@ public class User {
 
     private String back4;
 
+    private String search;
+
     public User(){}
 
-    public User(String userId, String userPassword, Integer userType, String userPhone, String userEmail) {
+    public User(String userId, String userName, String userPassword, Integer userType, String userPhone, String userEmail) {
         this.userId = userId;
+        this.userName = userName;
         this.userPassword = userPassword;
         this.userType = userType;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserId() {
@@ -99,5 +113,13 @@ public class User {
 
     public void setBack4(String back4) {
         this.back4 = back4 == null ? null : back4.trim();
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }
