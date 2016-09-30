@@ -3,6 +3,7 @@
 <mapper namespace="com.hlju.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.hlju.model.User" >
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
@@ -15,13 +16,14 @@
 
   <resultMap id="ResponseMap" type="com.hlju.response.UserResp" >
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    user_id, user_password, user_type, user_phone, user_email, back_1, back_2, back_3,
+    user_id, user_name, user_password, user_type, user_phone, user_email, back_1, back_2, back_3,
     back_4
   </sql>
 
@@ -37,21 +39,14 @@
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.hlju.model.User" >
-    insert into user (user_id, user_password, user_type,
-      user_phone, user_email, back_1,
-      back_2, back_3, back_4
-      )
-    values (#{userId,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER},
-      #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{back1,jdbcType=VARCHAR},
-      #{back2,jdbcType=VARCHAR}, #{back3,jdbcType=VARCHAR}, #{back4,jdbcType=VARCHAR}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.hlju.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
       </if>
       <if test="userPassword != null" >
         user_password,
@@ -81,6 +76,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="userPassword != null" >
         #{userPassword,jdbcType=VARCHAR},
@@ -112,6 +110,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hlju.model.User" >
     update user
     <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="userPassword != null" >
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
@@ -152,6 +153,9 @@
       <if test="userId != null" >
         user_id,
       </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
       <if test="userPassword != null" >
         user_password,
       </if>
@@ -180,6 +184,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="userPassword != null" >
         #{userPassword,jdbcType=VARCHAR},
@@ -220,6 +227,9 @@
     <if test="userId != null" >
       user_id = #{userId,jdbcType=VARCHAR},
     </if>
+    <if test="userName != null" >
+      user_name = #{userName,jdbcType=VARCHAR},
+    </if>
     <if test="userPassword != null" >
       user_password = #{userPassword,jdbcType=VARCHAR},
     </if>
@@ -248,11 +258,14 @@
   
   <insert id="insertUserList" parameterType="java.util.List">
     insert into user
-      (user_id,user_password,user_type,user_phone,user_email)
+      (user_id,user_name,user_password,user_type,user_phone,user_email)
     VALUES
     <foreach collection="list" item="item" index="index" separator="," >
       (<if test="item.userId != null">
         #{item.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="item.userName != null">
+        #{item.userName,jdbcType=VARCHAR},
       </if>
       <if test="item.userPassword != null">
         #{item.userPassword,jdbcType=VARCHAR},
@@ -280,11 +293,14 @@
 
   <select id="getUser" parameterType="com.hlju.model.User" resultMap="ResponseMap">
     select
-    user_id,user_type,user_phone,user_email
+    user_id,user_name,user_type,user_phone,user_email
     from user
     where 1=1
     <if test="userId != null" >
-      and user_id = #{userId,jdbcType=VARCHAR}
+    and user_id = #{userId,jdbcType=VARCHAR}
+  </if>
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR}
     </if>
     <if test="userPassword != null" >
       and user_password = #{userPassword,jdbcType=VARCHAR}
@@ -308,6 +324,9 @@
     <if test="userId != null" >
       and user_id = #{userId,jdbcType=VARCHAR}
     </if>
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
     <if test="userPassword != null" >
       and user_password = #{userPassword,jdbcType=VARCHAR}
     </if>
@@ -330,6 +349,9 @@
     <if test="userId != null" >
       and user_id = #{userId,jdbcType=VARCHAR}
     </if>
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
     <if test="userPassword != null" >
       and user_password = #{userPassword,jdbcType=VARCHAR}
     </if>
@@ -342,16 +364,28 @@
     <if test="userEmail != null" >
       and user_email = #{userEmail,jdbcType=VARCHAR}
     </if>
+    <if test="search != null and search !='' " >
+      and (
+      user_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_type like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_phone like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_email like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      )
+    </if>
   </select>
 
-  <select id="getTeacherResp" parameterType="com.hlju.model.User" resultType="com.hlju.response.TeacherResp">
+  <select id="getCount" parameterType="com.hlju.model.User" resultType="java.lang.Integer">
     select
-    <include refid="Base_Column_List" />
+    count(*)
     from user
     where 1=1
     <if test="userId != null" >
       and user_id = #{userId,jdbcType=VARCHAR}
     </if>
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
     <if test="userPassword != null" >
       and user_password = #{userPassword,jdbcType=VARCHAR}
     </if>
@@ -363,6 +397,15 @@
     </if>
     <if test="userEmail != null" >
       and user_email = #{userEmail,jdbcType=VARCHAR}
+    </if>
+    <if test="search != null and search !='' " >
+      and (
+      user_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_type like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_phone like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or user_email like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      )
     </if>
   </select>
 </mapper>

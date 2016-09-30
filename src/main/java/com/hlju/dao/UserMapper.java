@@ -11,8 +11,6 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(String userId);
 
-    int insert(User record);
-
     int insertSelective(User record);
 
     User selectByPrimaryKey(String userId);
@@ -36,5 +34,9 @@ public interface UserMapper {
     UserResp getUserAll(User user);
 
     List<UserResp> getUserRespList(User user);
+
+    int getCount(User user);
+
+    List<UserResp> getUserRespListSearch(User user);
 
 }
