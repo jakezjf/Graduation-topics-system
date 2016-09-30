@@ -7,6 +7,8 @@ public class UserResp {
 
     private String userId;
 
+    private String userName;
+
     private Integer userType;
 
     private String userPhone;
@@ -17,6 +19,14 @@ public class UserResp {
 
 
     public UserResp(){}
+
+    public UserResp(String userId, String userName, Integer userType, String userPhone, String userEmail) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userType = userType;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+    }
 
     public UserResp(String userId, Integer userType, String userPhone, String userEmail) {
         this.userId = userId;
@@ -39,6 +49,14 @@ public class UserResp {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Integer getUserType() {
