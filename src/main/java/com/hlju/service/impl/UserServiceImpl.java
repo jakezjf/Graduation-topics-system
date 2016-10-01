@@ -1,10 +1,12 @@
 package com.hlju.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.hlju.common.CharToUnderLine;
 import com.hlju.dao.UserMapper;
 import com.hlju.model.User;
+import com.hlju.response.ObjectPageResp;
 import com.hlju.response.UserResp;
 import com.hlju.service.UserService;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,10 +80,29 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserAll(user);
     }
 
-    public List<UserResp> getUserRespList(User user) {
+    public ObjectPageResp getUserRespList(User user ,ObjectPageResp page) {
         if (user == null){
             return null;
         }
-        return userMapper.getUserRespList(user);
+        if (page!= null && page.getOffset() >= 0 && page.getLimit()>=0){
+            PageHelper.startPage(page.getOffset()>=10 ? (page.getOffset()/page.getLimit())+1 : 1,page.getLimit(),false);
+            if (page.getSort()!=null && !page.getSort().equals("")){
+                PageHelper.orderBy(CharToUnderLine.upperCharToUnderLine(page.getSort()) +" " +page.getOrder());
+            }
+            page.setRows(userMapper.getUserRespList(user));
+            return page;
+        }
+        return null;
+    }
+
+    public int getCount(User user) {
+        return userMapper.getCount(user);
+    }
+
+    public ObjectPageResp getUserRespListSearch(User user, ObjectPageResp page) {
+        if (user == null){
+            return null;
+        }
+        return null;
     }
 }

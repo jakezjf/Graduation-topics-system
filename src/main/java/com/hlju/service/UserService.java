@@ -1,6 +1,7 @@
 package com.hlju.service;
 
 import com.hlju.model.User;
+import com.hlju.response.ObjectPageResp;
 import com.hlju.response.UserResp;
 
 import java.util.List;
@@ -26,6 +27,10 @@ public interface UserService {
 
     UserResp getUserAll(User user);
 
-    List<UserResp> getUserRespList(User user);
+    ObjectPageResp getUserRespList(User user ,ObjectPageResp page);
+
+    int getCount(User user);
+
+    ObjectPageResp getUserRespListSearch(User user ,ObjectPageResp page);
 
 }
