@@ -1,6 +1,7 @@
 package com.hlju.controller.admin;
 
 import com.hlju.model.User;
+import com.hlju.response.ObjectPageResp;
 import com.hlju.response.UserResp;
 import com.hlju.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by JF on 2016/9/20.
  */
 @Controller
-@RequestMapping("user")
+@RequestMapping("userAdmin")
 public class UserController {
 
     @Autowired
@@ -110,15 +111,16 @@ public class UserController {
         return userService.getUserAll(user);
     }
 
-    @RequestMapping(value = "getUserRespList.jhtml",method = RequestMethod.POST,produces="application/json")
+    @RequestMapping(value = "getUserRespList1.jhtml",method = RequestMethod.POST,produces="application/json")
     @ResponseBody
-    public List<UserResp> getUserRespList(User user){
-        return userService.getUserRespList(user);
+    public ObjectPageResp getUserRespList(User user,ObjectPageResp page){
+        return userService.getUserRespList(user,page);
     }
 
     @RequestMapping(value = "getUserRespList.jhtml",method = RequestMethod.GET,produces="application/json")
     @ResponseBody
-    public List<UserResp> getUserRespListGet(User user){
-        return userService.getUserRespList(user);
+    public ObjectPageResp getUserRespListGet(User user,ObjectPageResp page){
+        page.setTotal(userService.getCount(user));
+        return userService.getUserRespList(user,page);
     }
 }
