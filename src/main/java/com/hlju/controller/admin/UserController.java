@@ -123,4 +123,10 @@ public class UserController {
         page.setTotal(userService.getCount(user));
         return userService.getUserRespList(user,page);
     }
+
+    @RequestMapping(value = "updateUser.jhtml")
+    @ResponseBody
+    public boolean updateUser(User user){
+        return userService.updateUser(user);
+    }
 }
