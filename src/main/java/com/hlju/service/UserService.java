@@ -33,4 +33,6 @@ public interface UserService {
 
     ObjectPageResp getUserRespListSearch(User user ,ObjectPageResp page);
 
+    boolean updateUser(User user);
+
 }

@@ -105,4 +105,12 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    public boolean updateUser(User user) {
+        if(user!=null){
+            return false;
+        }
+        userMapper.updateByPrimaryKeySelective(user);
+        return true;
+    }
 }
