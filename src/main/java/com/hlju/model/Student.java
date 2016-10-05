@@ -23,6 +23,8 @@ public class Student {
 
     private String back3;
 
+    private String search;
+
     public Student(){}
 
     public Student(String stuId, String stuName, Integer stuSex, String teaId, Integer gradeId, Integer collegeId, Integer majorId, Integer classId) {
@@ -34,6 +36,18 @@ public class Student {
         this.collegeId = collegeId;
         this.majorId = majorId;
         this.classId = classId;
+    }
+
+    public Student(String stuId, String stuName, Integer stuSex, String teaId, Integer gradeId, Integer collegeId, Integer majorId, Integer classId, String search) {
+        this.stuId = stuId;
+        this.stuName = stuName;
+        this.stuSex = stuSex;
+        this.teaId = teaId;
+        this.gradeId = gradeId;
+        this.collegeId = collegeId;
+        this.majorId = majorId;
+        this.classId = classId;
+        this.search = search;
     }
 
     public String getStuId() {
@@ -122,5 +136,13 @@ public class Student {
 
     public void setBack3(String back3) {
         this.back3 = back3 == null ? null : back3.trim();
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }
