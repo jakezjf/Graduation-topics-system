@@ -20,4 +20,6 @@ public interface StudentMapper {
 
     StudentResp getStudentResp(Student student);
 
+    int getCount(Student student);
+
 }
