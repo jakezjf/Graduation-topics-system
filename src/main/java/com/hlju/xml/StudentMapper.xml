@@ -231,6 +231,61 @@
     <if test="back3 != null" >
       and back_3 = #{back3,jdbcType=VARCHAR}
     </if>
+    <if test="search != null and search !='' ">
+      and (
+      stu_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or stu_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or stu_sex like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or tea_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or grade_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or college_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or major_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or class_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      )
+    </if>
+  </select>
+
+  <select id="getCount" parameterType="com.hlju.model.Student" resultType="java.lang.Integer">
+    select
+    count(*)
+    from student
+    where 1=1
+    <if test="stuId != null" >
+      and stu_id = #{stuId,jdbcType=VARCHAR}
+    </if>
+    <if test="stuName != null" >
+      and stu_name = #{stuName,jdbcType=VARCHAR}
+    </if>
+    <if test="stuSex != null" >
+      and stu_sex = #{stuSex,jdbcType=INTEGER}
+    </if>
+    <if test="teaId != null" >
+      and tea_id = #{teaId,jdbcType=VARCHAR}
+    </if>
+    <if test="gradeId != null" >
+      and grade_id = #{gradeId,jdbcType=INTEGER}
+    </if>
+    <if test="collegeId != null" >
+      and college_id = #{collegeId,jdbcType=INTEGER}
+    </if>
+    <if test="majorId != null" >
+      and major_id = #{majorId,jdbcType=INTEGER}
+    </if>
+    <if test="classId != null" >
+      and class_id = #{classId,jdbcType=INTEGER}
+    </if>
+    <if test="search != null and search !='' ">
+      and (
+      stu_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or stu_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or stu_sex like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or tea_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or grade_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or college_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or major_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or class_id like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      )
+    </if>
   </select>
 
 </mapper>
