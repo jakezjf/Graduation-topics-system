@@ -65,6 +65,15 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public boolean deleteUserById(String userId) {
+        if (userId!=null && !userId.equals("")){
+            userMapper.deleteByPrimaryKey(userId);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public UserResp getUser(User user) {
         if (user == null){
             return null;

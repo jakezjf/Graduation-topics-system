@@ -21,6 +21,8 @@ public interface UserService {
 
     boolean deleteUserListById(List<String> userIds);
 
+    boolean deleteUserById(String userIds);
+
     UserResp getUser(User user);
 
     User selectByPrimaryKey(String userId);
