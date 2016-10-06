@@ -129,4 +129,12 @@ public class UserController {
     public boolean updateUser(User user){
         return userService.updateUser(user);
     }
+
+    @RequestMapping(value = "deleteUserById.jhtml",produces="application/json")
+    @ResponseBody
+    public boolean deleteUserById(String userId){
+        return userService.deleteUserById(userId);
+    }
+
+
 }
