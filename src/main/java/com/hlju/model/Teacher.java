@@ -25,6 +25,8 @@ public class Teacher {
 
     private String back3;
 
+    private String search;
+
     public Teacher(){}
 
     public Teacher(String teaId, String teaName, Integer teaSex, Integer paperNow, Integer paperLimit, Integer gradeId, Integer collegeId, Integer majorId, Integer classId) {
@@ -37,6 +39,19 @@ public class Teacher {
         this.collegeId = collegeId;
         this.majorId = majorId;
         this.classId = classId;
+    }
+
+    public Teacher(String teaId, String teaName, Integer teaSex, Integer paperNow, Integer paperLimit, Integer gradeId, Integer collegeId, Integer majorId, Integer classId, String search) {
+        this.teaId = teaId;
+        this.teaName = teaName;
+        this.teaSex = teaSex;
+        this.paperNow = paperNow;
+        this.paperLimit = paperLimit;
+        this.gradeId = gradeId;
+        this.collegeId = collegeId;
+        this.majorId = majorId;
+        this.classId = classId;
+        this.search = search;
     }
 
     public String getTeaId() {
@@ -133,5 +148,13 @@ public class Teacher {
 
     public void setBack3(String back3) {
         this.back3 = back3 == null ? null : back3.trim();
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }
