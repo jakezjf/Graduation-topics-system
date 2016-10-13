@@ -1,6 +1,7 @@
 package com.hlju.service;
 
 import com.hlju.model.Student;
+import com.hlju.response.ObjectPageResp;
 import com.hlju.response.StudentResp;
 
 import java.util.List;
@@ -10,8 +11,6 @@ import java.util.List;
  */
 public interface StudentService {
 
-    List<StudentResp> getStudentRespList(Student student);
-
     boolean deleteStudentById(String stuId);
 
     boolean insertStudent(Student student);
@@ -19,5 +18,9 @@ public interface StudentService {
     boolean updateStudent(Student student);
 
     StudentResp getStudentResp(Student student);
+
+    ObjectPageResp getStudentRespList(Student student ,ObjectPageResp page);
+
+    int getCount(Student student);
 
 }
