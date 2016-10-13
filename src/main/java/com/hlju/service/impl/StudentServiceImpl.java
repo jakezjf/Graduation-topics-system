@@ -64,10 +64,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public ObjectPageResp getStudentRespList(Student student ,ObjectPageResp page) {
-        if (student == null){
-            return null;
-        }
-        if (page!= null && page.getOffset() >= 0 && page.getLimit()>=0) {
+       if (page!= null && page.getOffset() >= 0 && page.getLimit()>=0) {
             PageHelper.startPage(page.getOffset()>=10 ? (page.getOffset()/page.getLimit())+1 : 1,page.getLimit(),false);
             if (page.getSort()!=null && !page.getSort().equals("")){
                 PageHelper.orderBy(CharToUnderLine.upperCharToUnderLine(page.getSort()) +" " +page.getOrder());
