@@ -14,6 +14,7 @@
       /WEB-INF/config/mybatis-configuration.xml
       /WEB-INF/config/jf-admin-service.xml
       /WEB-INF/config/jf-admin-servlet.xml
+      /WEB-INF/config/redis-context.xml
     </param-value>
   </context-param>
   
@@ -45,20 +46,39 @@
     <filter-name>encoding</filter-name>
     <url-pattern>*.js</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>encoding</filter-name>
+    <url-pattern>*.json</url-pattern>
+  </filter-mapping>
+
+  <!--<servlet>-->
+    <!--<servlet-name>Admin</servlet-name>-->
+    <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+    <!--<init-param>-->
+      <!--<param-name>contextConfigLocation</param-name>-->
+      <!--<param-value>/WEB-INF/config/jf-admin-servlet.xml</param-value>-->
+    <!--</init-param>-->
+    <!--<load-on-startup>1</load-on-startup>-->
+  <!--</servlet>-->
+
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>Admin</servlet-name>-->
+    <!--<url-pattern>*.do</url-pattern>-->
+  <!--</servlet-mapping>-->
 
   <servlet>
-    <servlet-name>Admin</servlet-name>
+    <servlet-name>User</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/config/jf-admin-servlet.xml</param-value>
+      <param-value>/WEB-INF/config/jf-user-servlet.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>Admin</servlet-name>
-    <url-pattern>*.do</url-pattern>
+    <servlet-name>User</servlet-name>
+    <url-pattern>*.jhtml</url-pattern>
   </servlet-mapping>
   <!-- Spring 容器加载 -->
 
@@ -101,5 +121,9 @@
   <session-config>
     <session-timeout>40</session-timeout>
   </session-config>
+
+  <welcome-file-list>
+    <welcome-file>hlju/login/login.html</welcome-file>
+  </welcome-file-list>
 
 </web-app>
