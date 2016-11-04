@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hlju.dao.MajorMapper" >
+  <resultMap id="BaseResultMap" type="com.hlju.model.Major" >
+    <id column="major_id" property="majorId" jdbcType="INTEGER" />
+    <result column="major_name" property="majorName" jdbcType="VARCHAR" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <result column="back_1" property="back1" jdbcType="VARCHAR" />
+    <result column="back_2" property="back2" jdbcType="VARCHAR" />
+    <result column="back_3" property="back3" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="RespMap" type="com.hlju.response.MajorResp" >
+    <id column="major_id" property="majorId" jdbcType="INTEGER" />
+    <result column="major_name" property="majorName" jdbcType="VARCHAR" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    major_id, major_name, college_id, back_1, back_2, back_3
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from major
+    where major_id = #{majorId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from major
+    where major_id = #{majorId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.hlju.model.Major" >
+    insert into major
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="majorId != null" >
+        major_id,
+      </if>
+      <if test="majorName != null" >
+        major_name,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="back1 != null" >
+        back_1,
+      </if>
+      <if test="back2 != null" >
+        back_2,
+      </if>
+      <if test="back3 != null" >
+        back_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="majorId != null" >
+        #{majorId,jdbcType=INTEGER},
+      </if>
+      <if test="majorName != null" >
+        #{majorName,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="back1 != null" >
+        #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null" >
+        #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null" >
+        #{back3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hlju.model.Major" >
+    update major
+    <set >
+      <if test="majorName != null" >
+        major_name = #{majorName,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="back1 != null" >
+        back_1 = #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null" >
+        back_2 = #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null" >
+        back_3 = #{back3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where major_id = #{majorId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getCount" parameterType="com.hlju.model.Major" resultType="java.lang.Integer">
+    select COUNT(*)
+    from major
+    where 1=1
+    <if test="majorId != null" >
+      and major_id = #{majorId,jdbcType=INTEGER}
+    </if>
+    <if test="majorName != null" >
+      and major_name = #{majorName,jdbcType=VARCHAR}
+    </if>
+    <if test="collegeId != null" >
+      and college_id = #{collegeId,jdbcType=INTEGER}
+    </if>
+    <if test="search != null and search !='' ">
+      and (
+      major_id like CONCAT('%',#{search,jdbcType=INTEGER},'%' )
+      or major_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or college_id like CONCAT('%',#{search,jdbcType=INTEGER},'%' )
+      )
+    </if>
+  </select>
+
+  <select id="getMajorRespList" parameterType="com.hlju.model.Major" resultMap="RespMap">
+    select
+    <include refid="Base_Column_List" />
+    from major
+    where 1=1
+    <if test="majorId != null" >
+      and major_id = #{majorId,jdbcType=INTEGER}
+    </if>
+    <if test="majorName != null" >
+      and major_name = #{majorName,jdbcType=VARCHAR}
+    </if>
+    <if test="collegeId != null" >
+      and college_id = #{collegeId,jdbcType=INTEGER}
+    </if>
+    <if test="search != null and search !='' ">
+      and (
+      major_id like CONCAT('%',#{search,jdbcType=INTEGER},'%' )
+      or major_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      or college_id like CONCAT('%',#{search,jdbcType=INTEGER},'%' )
+      )
+    </if>
+  </select>
+
+</mapper>
