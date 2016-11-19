@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hlju.dao.GradeMapper" >
+  <resultMap id="BaseResultMap" type="com.hlju.model.Grade" >
+    <id column="grade_id" property="gradeId" jdbcType="INTEGER" />
+    <result column="grade_name" property="gradeName" jdbcType="VARCHAR" />
+    <result column="back_1" property="back1" jdbcType="VARCHAR" />
+    <result column="back_2" property="back2" jdbcType="VARCHAR" />
+    <result column="back_3" property="back3" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="RespMap" type="com.hlju.response.GradeResp" >
+    <id column="grade_id" property="gradeId" jdbcType="INTEGER" />
+    <result column="grade_name" property="gradeName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    grade_id, grade_name, back_1, back_2, back_3
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from grade
+    where grade_id = #{gradeId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from grade
+    where grade_id = #{gradeId,jdbcType=INTEGER}
+  </delete>
+
+
+  <insert id="insertSelective" parameterType="com.hlju.model.Grade" >
+    insert into grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gradeId != null" >
+        grade_id,
+      </if>
+      <if test="gradeName != null" >
+        grade_name,
+      </if>
+      <if test="back1 != null" >
+        back_1,
+      </if>
+      <if test="back2 != null" >
+        back_2,
+      </if>
+      <if test="back3 != null" >
+        back_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gradeId != null" >
+        #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="gradeName != null" >
+        #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="back1 != null" >
+        #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null" >
+        #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null" >
+        #{back3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.hlju.model.Grade" >
+    update grade
+    <set >
+      <if test="gradeName != null" >
+        grade_name = #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="back1 != null" >
+        back_1 = #{back1,jdbcType=VARCHAR},
+      </if>
+      <if test="back2 != null" >
+        back_2 = #{back2,jdbcType=VARCHAR},
+      </if>
+      <if test="back3 != null" >
+        back_3 = #{back3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where grade_id = #{gradeId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getCount" parameterType="com.hlju.model.Grade" resultType="java.lang.Integer" >
+    select count(*)
+    from grade
+    where 1=1
+    <if test="gradeId != null" >
+      grade_id = #{gradeId,jdbcType=INTEGER}
+    </if>
+    <if test="gradeName != null" >
+      grade_name = #{gradeName,jdbcType=VARCHAR},
+    </if>
+    <if test="search != null and search !='' ">
+      and (
+      grade_id like CONCAT('%',#{search,jdbcType=INTEGER},'%' )
+      or grade_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      )
+    </if>
+  </select>
+
+  <select id="getGradeRespList" parameterType="com.hlju.model.Grade" resultMap="RespMap">
+    select
+    <include refid="Base_Column_List" />
+    from grade
+    where 1=1
+    <if test="gradeId != null" >
+      grade_id = #{gradeId,jdbcType=INTEGER}
+    </if>
+    <if test="gradeName != null" >
+      grade_name = #{gradeName,jdbcType=VARCHAR},
+    </if>
+    <if test="search != null and search !='' ">
+      and (
+      grade_id like CONCAT('%',#{search,jdbcType=INTEGER},'%' )
+      or grade_name like CONCAT('%',#{search,jdbcType=VARCHAR},'%' )
+      )
+    </if>
+  </select>
+
+
+</mapper>
